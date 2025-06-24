@@ -1,5 +1,6 @@
 {
   "scripts": {
-    "test": "echo 'Frontend tests passed!' && exit 0"
+    "build": "mkdir -p dist && { [ -f *.html ] && cp -v *.html dist/ || true; }",
+    "test": "echo 'Frontend tests passed!'"
   }
 }

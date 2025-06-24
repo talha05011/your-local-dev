@@ -1,7 +1,8 @@
 FROM node:16-alpine
 WORKDIR /app
 COPY package*.json ./
-RUN npm install --production  # Install deps before copying code
+RUN npm install
 COPY . .
 EXPOSE 5000
-CMD ["node", "server.js"]
+# Remove any existing CMD/ENTRYPOINT that might interfere
+CMD ["npm", "start"] 

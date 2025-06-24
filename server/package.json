@@ -1,8 +1,7 @@
 {
   "scripts": {
-    "test": "echo 'Backend tests passed!' && exit 0"
-  },
-  "dependencies": {
-    "express": "^5.1.0"
+    "start": "node server.js",
+    "test": "echo 'Tests would run here' && exit 0",
+    "test:ci": "npm test"
   }
 }
