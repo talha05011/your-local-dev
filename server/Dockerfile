@@ -1,8 +1,7 @@
 FROM node:16-alpine
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm install --production  # Install deps before copying code
 COPY . .
 EXPOSE 5000
-HEALTHCHECK --interval=30s CMD curl -f http://localhost:5000/health || exit 1
 CMD ["node", "server.js"]
