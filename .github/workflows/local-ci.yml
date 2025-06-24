@@ -1,0 +1,17 @@
+name: Local CI/CD Pipeline
+
+on: [push]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Build Containers
+        run: ./scripts/build-local.sh
+        
+      - name: Run Tests
+        run: |
+          docker run frontend:local curl -s http://localhost:3000 | grep "My App"
+          docker run backend:local curl -s http://localhost:5000/health | grep "OK"
