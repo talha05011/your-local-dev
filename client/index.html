@@ -1,16 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Local Dev</title>
     <style>
-        body { font-family: Arial; text-align: center; margin-top: 50px; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            margin-top: 50px;
+            line-height: 1.6;
+            color: #333;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1>My Local Frontend</h1>
-    <p>Health: <a href="/health">/health</a></p>
-    <script>
-        document.write('<p>Deployed: ' + new Date() + '</p>')
-    </script>
+    <div class="container">
+        <h1>My Local Frontend</h1>
+        <p>Frontend Health: <a href="/health">/health</a></p>
+        <p>Backend Health: <a href="http://localhost:5000/health">/backend/health</a></p>
+        <script>
+            document.write('<p>Last Deployed: ' + new Date().toLocaleString() + '</p>');
+            document.write('<p>User Agent: ' + navigator.userAgent + '</p>');
+        </script>
+    </div>
 </body>
 </html>

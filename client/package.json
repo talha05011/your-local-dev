@@ -1,6 +1,11 @@
 {
+  "name": "frontend",
+  "version": "1.0.0",
   "scripts": {
-    "build": "mkdir -p dist && { [ -f *.html ] && cp -v *.html dist/ || true; }",
-    "test": "echo 'Frontend tests passed!'"
+    "build": "mkdir -p dist && cp -v *.html *.css *.js dist/ 2>/dev/null || true",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^30.0.2"
   }
 }

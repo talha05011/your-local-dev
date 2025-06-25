@@ -1,8 +1,7 @@
-FROM node:16-alpine
+FROM node:18-alpine
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+COPY package.json .
+RUN npm install express
 COPY . .
 EXPOSE 5000
-# Remove any existing CMD/ENTRYPOINT that might interfere
-CMD ["npm", "start"] 
+CMD ["node", "server.js"]

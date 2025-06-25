@@ -1,17 +1,14 @@
-# Stage 1: Build
-FROM node:16-alpine as builder
+# Build stage
+FROM node:18-alpine as builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 COPY . .
-# Create dist directory and copy only existing files
-RUN mkdir -p dist && \
-    { [ -f *.html ] && cp -v *.html dist/ || true; } && \
-    { [ -f *.css ] && cp -v *.css dist/ || true; } && \
-    { [ -f *.js ] && cp -v *.js dist/ || true; }
+RUN npm run build
 
-# Stage 2: Runtime
+# Runtime stage
 FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 3000
+CMD ["nginx", "-g", "daemon off;"]
