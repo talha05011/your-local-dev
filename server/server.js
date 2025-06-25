@@ -2,28 +2,32 @@ const express = require('express');
 const app = express();
 const PORT = 5000;
 
-// Middleware to handle connection errors
+// Immediate response middleware
 app.use((req, res, next) => {
-  res.set('Connection', 'close');
+  res.set('Connection', 'keep-alive');
   next();
+});
+
+// Instant health check
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
 });
 
 // Root endpoint
 app.get('/', (req, res) => {
   res.send(`
-    <h1 style="color:green;">BACKEND IS WORKING</h1>
-    <p>Server time: ${new Date()}</p>
+    <h1 style="color:green;text-align:center;">
+      ✅ BACKEND WORKING
+      <small>${new Date().toLocaleTimeString()}</small>
+    </h1>
   `);
 });
 
-// Start server with error handling
+// Start server with zero-delay
 const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
-  process._healthy = true; // Manual health flag
+  console.log(`Server ready on ${PORT}`);
+  process.emit('server_ready'); // Special event
 });
 
 // Keep process alive
 setInterval(() => {}, 1000);
-process.on('uncaughtException', (e) => {
-  console.log('Error handled:', e.message);
-});

@@ -1,27 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Local Dev</title>
+    <title>Live Reload Tester</title>
     <style>
-        body { 
-            font-family: Arial; 
+        body {
+            font-family: Arial;
             text-align: center;
             margin-top: 50px;
-            background: #f5f5f5;
+            background: #f0f8ff;
+            transition: all 0.5s;
         }
-        .version {
-            color: green;
-            font-weight: bold;
+        .change-indicator {
+            background: #4CAF50;
+            color: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        .timestamp {
+            font-size: 24px;
+            color: #2196F3;
             margin: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>My Local Frontend</h1>
-    <div class="version">Version: 2.0 (Stable)</div>
-    <p>Health: <a href="/health">/health</a></p>
+    <h1>🔄 Auto-Reload Tester</h1>
+    
+    <div class="change-indicator">
+        <h2>THIS SHOULD UPDATE AUTOMATICALLY</h2>
+        <div class="timestamp" id="time">Loading...</div>
+    </div>
+
+    <p>Backend: <a href="http://localhost:5000">Check backend</a></p>
+
     <script>
-        document.write('<p>Loaded: ' + new Date() + '</p>');
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('time').innerHTML = 
+                `Last update: ${now.toLocaleTimeString()}<br>
+                 <small>${now.getMilliseconds()}ms</small>`;
+        }
+        updateTime();
+        setInterval(updateTime, 100);
     </script>
 </body>
 </html>
