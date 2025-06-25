@@ -2,20 +2,17 @@
 set -eo pipefail
 
 echo "=== BUILDING ==="
-docker compose build || {
-    echo "❌ Build failed"
-    docker compose logs
-    exit 1
-}
+docker compose build
 
 echo "=== DEPLOYING ==="
-docker compose up -d
+docker compose up -d backend frontend
 
 echo "=== RUNNING TESTS ==="
-docker compose run --rm backend-test || {
-    echo "❌ Tests failed"
-    docker compose logs backend-test
-    exit 1
-}
+docker compose run --rm backend-test
+
+echo "=== VERIFYING ==="
+curl -f http://localhost:5000 && echo "Backend OK" || echo "Backend Error"
+curl -f http://localhost:3000 && echo "Frontend OK" || echo "Frontend Error"
 
 echo "✅ Pipeline completed successfully"
+docker compose ps
