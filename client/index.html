@@ -1,50 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Live Reload Tester</title>
+    <title>Auto-Reload Test</title>
     <style>
         body {
             font-family: Arial;
             text-align: center;
-            margin-top: 50px;
-            background: #f0f8ff;
-            transition: all 0.5s;
-        }
-        .change-indicator {
             background: #4CAF50;
             color: white;
-            padding: 20px;
-            margin: 20px auto;
-            width: 80%;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            padding: 50px;
         }
         .timestamp {
             font-size: 24px;
-            color: #2196F3;
             margin: 20px;
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <h1>🔄 Auto-Reload Tester</h1>
-    
-    <div class="change-indicator">
-        <h2>THIS SHOULD UPDATE AUTOMATICALLY</h2>
-        <div class="timestamp" id="time">Loading...</div>
-    </div>
-
-    <p>Backend: <a href="http://localhost:5000">Check backend</a></p>
+    <h1>🔄 Auto-Reload Working for now!</h1>
+    <div class="timestamp" id="time"></div>
+    <p>Try changing and saving this file - it will update automatically</p>
 
     <script>
         function updateTime() {
-            const now = new Date();
-            document.getElementById('time').innerHTML = 
-                `Last update: ${now.toLocaleTimeString()}<br>
-                 <small>${now.getMilliseconds()}ms</small>`;
+            document.getElementById('time').textContent = new Date().toLocaleTimeString();
         }
+        setInterval(updateTime, 1000);
         updateTime();
-        setInterval(updateTime, 100);
     </script>
 </body>
 </html>

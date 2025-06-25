@@ -2,10 +2,9 @@
   "name": "frontend",
   "version": "1.0.0",
   "scripts": {
-    "build": "mkdir -p dist && cp -v *.html *.css *.js dist/ 2>/dev/null || true",
-    "test": "jest"
+    "start": "npx browser-sync start --server --files '**/*'"
   },
-  "devDependencies": {
-    "jest": "^30.0.2"
+  "dependencies": {
+    "browser-sync": "^2.29.3"
   }
 }
